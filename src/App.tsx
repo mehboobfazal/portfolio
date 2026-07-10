@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Shield, Cpu, Database, Code2, Server, Terminal, Layers, Cloud, GitFork, Activity, Workflow, Network, ChevronRight, ExternalLink, Linkedin, Github, Mail, FileText, Lock, ArrowUpRight, Calendar, Menu, X, Send, Check, Briefcase, Sliders, Sparkles, MapPin, ChevronDown, Info, Phone } from "lucide-react";
+import { Shield, Cpu, Database, Code2, Server, Terminal, Layers, Cloud, GitFork, Activity, Workflow, Network, ChevronRight, ExternalLink, Linkedin, Github, Mail, FileText, Lock, ArrowUpRight, Calendar, Menu, X, Send, Check, Briefcase, Sliders, Sparkles, MapPin, ChevronDown, Info, Phone, Sun, Moon } from "lucide-react";
 
 import { skillCategories, flagshipProjects, freelanceProjects, careerTimeline } from "./components/portfolioData";
 import NetworkTopology from "./components/NetworkTopology";
@@ -30,6 +30,24 @@ export default function App() {
         setProfileAnimating(false);
         setTimeout(() => setProfileOpen(false), 300);
     };
+
+    // Theme state (class-based, not device theme)
+    const [theme, setTheme] = useState<'light' | 'dark'>(() => (typeof window !== 'undefined' && (localStorage.getItem('theme') === 'dark')) ? 'dark' : 'light');
+
+    useEffect(() => {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        try {
+            localStorage.setItem('theme', theme);
+        } catch (e) {
+            // ignore
+        }
+    }, [theme]);
+
+    const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
 
     // Skill Icon lookup helper representing modular layouts
     const getSkillIcon = (iconName: string) => {
@@ -182,7 +200,7 @@ export default function App() {
                         {/* Hero Text Copy Block (Columns 1-7) */}
                         <div className="lg:col-span-7 flex flex-col">
                             {/* Simple Experience Badge */}
-                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 border border-indigo-100 rounded-full text-xs font-mono text-indigo-700 w-fit mb-6">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 border border-indigo-100 rounded-full text-xs font-mono text-indigo-700 w-fit mb-6 dark:bg-indigo-900 dark:border-indigo-700 dark:text-indigo-200">
                                 <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
                                 <span>11+ Years of Software Engineering</span>
                             </div>
@@ -203,12 +221,12 @@ export default function App() {
                                     Contact Me
                                 </a>
 
-                                <a id="hero-github" href="https://github.com/mehboobfazal" target="_blank" referrerPolicy="no-referrer" rel="noopener noreferrer" className="px-5 py-3 text-sm font-semibold text-slate-700 hover:text-indigo-600 border border-slate-200 hover:border-slate-350 bg-white hover:bg-slate-50 rounded-xl flex items-center gap-2 transition-all cursor-pointer">
+                                <a id="hero-github" href="https://github.com/mehboobfazal" target="_blank" referrerPolicy="no-referrer" rel="noopener noreferrer" className="px-5 py-3 text-sm font-semibold text-slate-700 hover:text-indigo-600 border border-slate-200 hover:border-slate-350 bg-white hover:bg-slate-50 rounded-xl flex items-center gap-2 transition-all cursor-pointer dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:text-indigo-300">
                                     <Github className="w-4 h-4" />
                                     <span>GitHub</span>
                                 </a>
 
-                                <a id="hero-linkedin" href="https://linkedin.com/in/fazal-shah" target="_blank" referrerPolicy="no-referrer" rel="noopener noreferrer" className="px-5 py-3 text-sm font-semibold text-slate-700 hover:text-indigo-600 border border-slate-200 hover:border-slate-350 bg-white hover:bg-slate-50 rounded-xl flex items-center gap-2 transition-all cursor-pointer">
+                                <a id="hero-linkedin" href="https://linkedin.com/in/fazal-shah" target="_blank" referrerPolicy="no-referrer" rel="noopener noreferrer" className="px-5 py-3 text-sm font-semibold text-slate-700 hover:text-indigo-600 border border-slate-200 hover:border-slate-350 bg-white hover:bg-slate-50 rounded-xl flex items-center gap-2 transition-all cursor-pointer dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:text-indigo-300">
                                     <Linkedin className="w-4 h-4" />
                                     <span>LinkedIn</span>
                                 </a>
@@ -219,7 +237,7 @@ export default function App() {
                         <div className="lg:col-span-5 relative flex items-center justify-center">
                             <div className="w-full max-w-[420px] aspect-square rounded-2xl bg-white border border-slate-200/80 p-6 flex flex-col justify-between shadow-sm relative">
                                 <div className="flex items-center justify-between">
-                                    <div className="w-10 h-10 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                                    <div className="w-10 h-10 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center dark:bg-indigo-900 dark:border-indigo-700">
                                         <Layers className="w-5 h-5 text-indigo-600" />
                                     </div>
                                     <span className="text-[10px] font-mono tracking-wider text-slate-400">CORE SPECIALTIES</span>
@@ -255,7 +273,7 @@ export default function App() {
                 <section className="bg-white py-8">
                     <div className="max-w-7xl mx-auto px-6">
                         <div id="enterprise-disclaimer" className="p-6 md:p-8 bg-slate-50 border border-slate-200 rounded-2xl relative overflow-hidden flex flex-col md:flex-row gap-6 items-start">
-                            <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-xl text-indigo-600 flex-shrink-0">
+                            <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-xl text-indigo-600 flex-shrink-0 dark:bg-indigo-900 dark:border-indigo-700 dark:text-indigo-200">
                                 <Lock className="w-6 h-6" />
                             </div>
 
@@ -312,7 +330,7 @@ export default function App() {
                                                         {getSkillIcon(skill.iconName)}
                                                         <span className="text-xs font-medium text-slate-700">{skill.name}</span>
                                                     </div>
-                                                    <span className="text-[10px] font-mono px-2 py-0.5 bg-slate-200/50 rounded-md text-slate-500 uppercase">{skill.level}</span>
+                                                    <span className="text-[10px] font-mono px-2 py-0.5 bg-slate-200/50 rounded-md text-slate-500 uppercase dark:bg-slate-800/60 dark:text-slate-200">{skill.level}</span>
                                                 </div>
                                             ))}
                                         </div>
@@ -351,13 +369,13 @@ export default function App() {
                             {flagshipProjects.map((project, idx) => (
                                 <div key={project.id} id={`project-case-${project.id}`} className="bg-white border border-slate-200 hover:border-slate-300 rounded-2xl p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center transition-all duration-300 relative overflow-hidden group shadow-xs">
                                     {/* Subtle right accent background */}
-                                    <div className="absolute -right-4 -top-4 w-48 h-48 bg-indigo-50/30 rounded-full blur-3xl group-hover:bg-indigo-50/50 transition-all pointer-events-none" />
+                                    <div className="absolute -right-4 -top-4 w-48 h-48 bg-indigo-50/30 rounded-full blur-3xl group-hover:bg-indigo-50/50 transition-all pointer-events-none dark:bg-indigo-900/20" />
 
                                     {/* Card Content - Left Side */}
                                     <div className="lg:col-span-8 flex flex-col justify-between h-full">
                                         <div>
                                             {/* Tag Badge */}
-                                            <span className="inline-block px-3 py-1 bg-slate-100 border border-slate-200 text-slate-600 font-mono text-[10px] uppercase tracking-wider rounded-lg mb-4">{project.tag}</span>
+                                            <span className="inline-block px-3 py-1 bg-slate-100 border border-slate-200 text-slate-600 font-mono text-[10px] uppercase tracking-wider rounded-lg mb-4 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200">{project.tag}</span>
 
                                             {/* Title */}
                                             <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-800 tracking-tight mb-4">{project.title}</h3>
@@ -382,7 +400,7 @@ export default function App() {
                                         {/* Tech Badges */}
                                         <div className="flex flex-wrap gap-2 pt-4">
                                             {project.techStack.map((tech) => (
-                                                <span key={tech} className="px-2.5 py-1 bg-slate-100 border border-slate-200/50 text-[11px] font-mono text-slate-600 rounded-md">
+                                                <span key={tech} className="px-2.5 py-1 bg-slate-100 border border-slate-200/50 text-[11px] font-mono text-slate-600 rounded-md dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200">
                                                     {tech}
                                                 </span>
                                             ))}
@@ -435,7 +453,7 @@ export default function App() {
                                         <div>
                                             <div className="flex items-center justify-between mb-4">
                                                 <h4 className="font-display font-bold text-lg text-slate-800">{fProj.title}</h4>
-                                                <a id={`freelance-link-${fIdx}`} href={fProj.link} target="_blank" referrerPolicy="no-referrer" rel="noopener noreferrer" className="p-1 px-2.5 bg-slate-50 border border-slate-200 text-[10px] font-mono text-cyan-600 hover:text-cyan-700 rounded hover:border-slate-300 flex items-center gap-1 transition-all cursor-pointer">
+                                                <a id={`freelance-link-${fIdx}`} href={fProj.link} target="_blank" referrerPolicy="no-referrer" rel="noopener noreferrer" className="p-1 px-2.5 bg-slate-50 border border-slate-200 text-[10px] font-mono text-cyan-600 hover:text-cyan-700 rounded hover:border-slate-300 flex items-center gap-1 transition-all cursor-pointer dark:bg-slate-800 dark:border-slate-700 dark:text-cyan-300 dark:hover:text-cyan-200">
                                                     <span>{fProj.displayLink}</span>
                                                     <ArrowUpRight className="w-3" />
                                                 </a>
@@ -455,7 +473,7 @@ export default function App() {
 
                                         <div className="flex flex-wrap gap-1.5 pt-2">
                                             {fProj.tags.map((tag) => (
-                                                <span key={tag} className="px-2 py-0.5 bg-slate-100 text-[10px] text-slate-500 font-mono rounded">
+                                                <span key={tag} className="px-2 py-0.5 bg-slate-100 text-[10px] text-slate-500 font-mono rounded dark:bg-slate-800 dark:text-slate-300">
                                                     {tag}
                                                 </span>
                                             ))}
@@ -492,13 +510,13 @@ export default function App() {
                                                 <div>
                                                     <h3 className="font-display font-bold text-slate-800 text-lg leading-tight">{item.role}</h3>
                                                     <span className="text-xs text-slate-550 leading-none block mt-0.5">
-                                                        {item.company} &mdash; <span className="font-mono text-[10px] bg-slate-100 text-slate-600 px-1 py-0.5 rounded">{item.location}</span>
+                                                        {item.company} &mdash; <span className="font-mono text-[10px] bg-slate-100 text-slate-600 px-1 py-0.5 rounded dark:bg-slate-800 dark:text-slate-200">{item.location}</span>
                                                     </span>
                                                 </div>
                                             </div>
 
                                             {/* Period Badge */}
-                                            <span className="px-3 py-1 bg-white border border-slate-200 text-slate-600 font-mono text-xs rounded-lg flex items-center gap-1.5 w-fit h-fit self-start sm:self-auto shadow-xs">
+                                            <span className="px-3 py-1 bg-white border border-slate-200 text-slate-600 font-mono text-xs rounded-lg flex items-center gap-1.5 w-fit h-fit self-start sm:self-auto shadow-xs dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200">
                                                 <Calendar className="w-3.5 h-3.5 text-slate-400" />
                                                 <span>{item.period}</span>
                                             </span>
@@ -518,7 +536,7 @@ export default function App() {
 
                                         <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-200">
                                             {item.techUsed.map((tech) => (
-                                                <span key={tech} className="px-2 py-0.5 bg-white border border-slate-150 text-[10px] font-mono text-slate-500 rounded">
+                                                <span key={tech} className="px-2 py-0.5 bg-white border border-slate-150 text-[10px] font-mono text-slate-500 rounded dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200">
                                                     {tech}
                                                 </span>
                                             ))}
@@ -544,7 +562,7 @@ export default function App() {
 
                                 {/* Direct info list */}
                                 <div className="space-y-4 font-mono text-xs">
-                                    <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs">
+                                    <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs dark:bg-slate-800 dark:border-slate-700">
                                         <Mail className="w-4 h-4 text-indigo-600" />
                                         <span className="text-slate-400 font-semibold">EMAIL:</span>
                                         <a href="mailto:mehboobfazal36@gmail.com" className="text-indigo-600 hover:text-indigo-805 hover:underline">
@@ -552,7 +570,7 @@ export default function App() {
                                         </a>
                                     </div>
 
-                                    <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs">
+                                    <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs dark:bg-slate-800 dark:border-slate-700">
                                         <Phone className="w-4 h-4 text-emerald-600" />
                                         <span className="text-slate-400 font-semibold">WHATSAPP:</span>
                                         <a href="https://wa.me/9779816549588" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700 hover:underline">
@@ -560,10 +578,10 @@ export default function App() {
                                         </a>
                                     </div>
 
-                                    <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs">
+                                    <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs dark:bg-slate-800 dark:border-slate-700">
                                         <MapPin className="w-4 h-4 text-cyan-600" />
                                         <span className="text-slate-400 font-semibold">LOCATION:</span>
-                                        <span className="text-slate-700 font-sans font-medium">Kathmandu, Nepal</span>
+                                                                            <span className="text-slate-700 font-sans font-medium dark:text-slate-200">Kathmandu, Nepal</span>
                                     </div>
                                 </div>
                             </div>
@@ -578,13 +596,13 @@ export default function App() {
                                             <label htmlFor="form-name" className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
                                                 Your Name
                                             </label>
-                                            <input id="form-name" type="text" required value={formState.name} onChange={(e) => setFormState({ ...formState, name: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white" placeholder="e.g. Alexis Chen" />
+                                            <input id="form-name" type="text" required value={formState.name} onChange={(e) => setFormState({ ...formState, name: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900" placeholder="e.g. Alexis Chen" />
                                         </div>
                                         <div>
                                             <label htmlFor="form-email" className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
                                                 Your Email
                                             </label>
-                                            <input id="form-email" type="email" required value={formState.email} onChange={(e) => setFormState({ ...formState, email: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white" placeholder="e.g. alexis@company.com" />
+                                            <input id="form-email" type="email" required value={formState.email} onChange={(e) => setFormState({ ...formState, email: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900" placeholder="e.g. alexis@company.com" />
                                         </div>
                                     </div>
 
@@ -592,7 +610,7 @@ export default function App() {
                                         <label htmlFor="form-company" className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
                                             Company (Optional)
                                         </label>
-                                        <input id="form-company" type="text" value={formState.company} onChange={(e) => setFormState({ ...formState, company: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white" placeholder="e.g. Systems Inc." />
+                                        <input id="form-company" type="text" value={formState.company} onChange={(e) => setFormState({ ...formState, company: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900" placeholder="e.g. Systems Inc." />
                                     </div>
 
                                     <div>
@@ -605,7 +623,7 @@ export default function App() {
                                             required
                                             value={formState.message}
                                             onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white resize-none"
+                                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900"
                                             placeholder="Describe your project, timeline, or requirements..."
                                         />
                                     </div>
@@ -672,6 +690,12 @@ export default function App() {
                     </div>
                 </div>
             </footer>
-        </div>
+
+            {/* Theme toggle (class-based) */}
+            <button aria-label="Toggle theme" onClick={toggleTheme} className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 backdrop-blur-sm">
+                            {theme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-900" />}
+            </button>
+
+            </div>
     );
 }
