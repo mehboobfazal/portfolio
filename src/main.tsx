@@ -3,7 +3,8 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import BubbleLoader from "./components/BubbleLoader";
 
-const App = lazy(() => import("./App"));
+const MIN_LOADING_MS = 2000; // minimum time to show the loader in ms
+const App = lazy(() => Promise.all([import("./App"), new Promise((res) => setTimeout(res, MIN_LOADING_MS))]).then(([module]) => module));
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
