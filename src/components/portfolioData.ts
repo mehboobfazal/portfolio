@@ -126,32 +126,21 @@ export const freelanceProjects = [
 
 export const careerTimeline: ExperienceItem[] = [
     {
-        id: "xp-apm",
-        period: "July 2025 – June 2026",
-        role: "Assistant Project Manager",
+        id: "xp-lead",
+        period: "July 2019 – June 2026",
+        role: "Lead Developer",
         company: "K.System Pvt. Ltd. / YoungLimWon Soft Lab",
-        location: "Seoul, South Korea (Remote Framework)",
-        description: "Taking charge of release synchronization, architecture scaling plans, and modern LLM-enabler modules for top-tier Korean ERP architectures.",
+        location: "Seoul, South Korea",
+        description: "Primary software engineering design, architecture scaling plans, complex DB code optimizing, and front-end modernization across SystemEver Cloud ERP frameworks.",
         impacts: [
             "Bridged engineering execution gaps, leading key developers across complex product updates and secure multi-tenant migrations",
             "Pioneered internal RAG search products linking legal and core corporate documentation databases directly into secure workspace tools",
             "Oversaw deployment optimization guidelines for next-gen modular microservices architecture, trimming startup overhead by 30%",
-        ],
-        techUsed: ["Dify", "Azure OpenAI", "System Architecture Design", "Agile Delivery", "TS/JS"],
-    },
-    {
-        id: "xp-lead",
-        period: "July 2019 – June 2025",
-        role: "Lead Developer",
-        company: "K.System Pvt. Ltd. / YoungLimWon Soft Lab",
-        location: "Seoul, South Korea",
-        description: "Primary software engineering design, complex DB code optimizing, and front-end modernization across SystemEver Cloud ERP frameworks.",
-        impacts: [
             "Spearheaded performance tuning of core stored procedures and table partitions, supporting 2,500+ global merchant configurations",
             "Authored scalable API modules in .NET, and designed clean replacement frameworks eliminating dependencies on sluggish legacy grids",
             "Mentored and guided software developers, introducing state management protocols and high-efficiency database query audits",
         ],
-        techUsed: ["C# (.NET)", "SQL Server", "JavaScript", "Tailwind", "Docker", "RESTful APIs"],
+        techUsed: ["Nodejs", "ReactJs", "Nextjs", "ExpressJs", "Tailwindcss", "C# (.NET)", "SQL Server", "JavaScript", "Docker", "RESTful APIs", "Dify", "Azure OpenAI", "System Architecture Design", "Agile Delivery"],
     },
     {
         id: "xp-dev",
