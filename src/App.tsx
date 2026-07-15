@@ -32,22 +32,22 @@ export default function App() {
     };
 
     // Theme state (class-based, not device theme)
-    const [theme, setTheme] = useState<'light' | 'dark'>(() => (typeof window !== 'undefined' && (localStorage.getItem('theme') === 'dark')) ? 'dark' : 'light');
+    const [theme, setTheme] = useState<"light" | "dark">(() => (typeof window !== "undefined" && localStorage.getItem("theme") === "dark" ? "dark" : "light"));
 
     useEffect(() => {
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
         } else {
-            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.remove("dark");
         }
         try {
-            localStorage.setItem('theme', theme);
+            localStorage.setItem("theme", theme);
         } catch (e) {
             // ignore
         }
     }, [theme]);
 
-    const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+    const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
     // Skill Icon lookup helper representing modular layouts
     const getSkillIcon = (iconName: string) => {
@@ -179,11 +179,7 @@ export default function App() {
             {profileOpen && (
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60" onClick={closeProfile}>
                     <div className="p-4">
-                        <img
-                            src="/profile.jpg"
-                            alt="Fazal Shah large"
-                            className={`max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl transform transition-all duration-300 ${profileAnimating ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
-                        />
+                        <img src="/profile.jpg" alt="Fazal Shah large" className={`max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl transform transition-all duration-300 ${profileAnimating ? "scale-100 opacity-100" : "scale-75 opacity-0"}`} />
                     </div>
                 </div>
             )}
@@ -221,12 +217,26 @@ export default function App() {
                                     Contact Me
                                 </a>
 
-                                <a id="hero-github" href="https://github.com/mehboobfazal" target="_blank" referrerPolicy="no-referrer" rel="noopener noreferrer" className="px-5 py-3 text-sm font-semibold text-slate-700 hover:text-indigo-600 border border-slate-200 hover:border-slate-350 bg-white hover:bg-slate-50 rounded-xl flex items-center gap-2 transition-all cursor-pointer dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:text-indigo-300">
+                                <a
+                                    id="hero-github"
+                                    href="https://github.com/mehboobfazal"
+                                    target="_blank"
+                                    referrerPolicy="no-referrer"
+                                    rel="noopener noreferrer"
+                                    className="px-5 py-3 text-sm font-semibold text-slate-700 hover:text-indigo-600 border border-slate-200 hover:border-slate-350 bg-white hover:bg-slate-50 rounded-xl flex items-center gap-2 transition-all cursor-pointer dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:text-indigo-300"
+                                >
                                     <Github className="w-4 h-4" />
                                     <span>GitHub</span>
                                 </a>
 
-                                <a id="hero-linkedin" href="https://linkedin.com/in/fazal-shah" target="_blank" referrerPolicy="no-referrer" rel="noopener noreferrer" className="px-5 py-3 text-sm font-semibold text-slate-700 hover:text-indigo-600 border border-slate-200 hover:border-slate-350 bg-white hover:bg-slate-50 rounded-xl flex items-center gap-2 transition-all cursor-pointer dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:text-indigo-300">
+                                <a
+                                    id="hero-linkedin"
+                                    href="https://linkedin.com/in/fazal-shah"
+                                    target="_blank"
+                                    referrerPolicy="no-referrer"
+                                    rel="noopener noreferrer"
+                                    className="px-5 py-3 text-sm font-semibold text-slate-700 hover:text-indigo-600 border border-slate-200 hover:border-slate-350 bg-white hover:bg-slate-50 rounded-xl flex items-center gap-2 transition-all cursor-pointer dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:text-indigo-300"
+                                >
                                     <Linkedin className="w-4 h-4" />
                                     <span>LinkedIn</span>
                                 </a>
@@ -453,7 +463,14 @@ export default function App() {
                                         <div>
                                             <div className="flex items-center justify-between mb-4">
                                                 <h4 className="font-display font-bold text-lg text-slate-800">{fProj.title}</h4>
-                                                <a id={`freelance-link-${fIdx}`} href={fProj.link} target="_blank" referrerPolicy="no-referrer" rel="noopener noreferrer" className="p-1 px-2.5 bg-slate-50 border border-slate-200 text-[10px] font-mono text-cyan-600 hover:text-cyan-700 rounded hover:border-slate-300 flex items-center gap-1 transition-all cursor-pointer dark:bg-slate-800 dark:border-slate-700 dark:text-cyan-300 dark:hover:text-cyan-200">
+                                                <a
+                                                    id={`freelance-link-${fIdx}`}
+                                                    href={fProj.link}
+                                                    target="_blank"
+                                                    referrerPolicy="no-referrer"
+                                                    rel="noopener noreferrer"
+                                                    className="p-1 px-2.5 bg-slate-50 border border-slate-200 text-[10px] font-mono text-cyan-600 hover:text-cyan-700 rounded hover:border-slate-300 flex items-center gap-1 transition-all cursor-pointer dark:bg-slate-800 dark:border-slate-700 dark:text-cyan-300 dark:hover:text-cyan-200"
+                                                >
                                                     <span>{fProj.displayLink}</span>
                                                     <ArrowUpRight className="w-3" />
                                                 </a>
@@ -572,16 +589,16 @@ export default function App() {
 
                                     <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs dark:bg-slate-800 dark:border-slate-700">
                                         <Phone className="w-4 h-4 text-emerald-600" />
-                                        <span className="text-slate-400 font-semibold">WHATSAPP:</span>
-                                        <a href="https://wa.me/9779816549588" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700 hover:underline">
-                                            +977 9816549588
+                                        <span className="text-slate-400 font-semibold">WHATSAPP / Call:</span>
+                                        <a href="https://wa.me/9779712012399" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700 hover:underline">
+                                            +977 9712012399
                                         </a>
                                     </div>
 
                                     <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs dark:bg-slate-800 dark:border-slate-700">
                                         <MapPin className="w-4 h-4 text-cyan-600" />
                                         <span className="text-slate-400 font-semibold">LOCATION:</span>
-                                                                            <span className="text-slate-700 font-sans font-medium dark:text-slate-200">Kathmandu, Nepal</span>
+                                        <span className="text-slate-700 font-sans font-medium dark:text-slate-200">Kathmandu, Nepal</span>
                                     </div>
                                 </div>
                             </div>
@@ -596,13 +613,29 @@ export default function App() {
                                             <label htmlFor="form-name" className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
                                                 Your Name
                                             </label>
-                                            <input id="form-name" type="text" required value={formState.name} onChange={(e) => setFormState({ ...formState, name: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900" placeholder="e.g. Alexis Chen" />
+                                            <input
+                                                id="form-name"
+                                                type="text"
+                                                required
+                                                value={formState.name}
+                                                onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900"
+                                                placeholder="e.g. Alexis Chen"
+                                            />
                                         </div>
                                         <div>
                                             <label htmlFor="form-email" className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
                                                 Your Email
                                             </label>
-                                            <input id="form-email" type="email" required value={formState.email} onChange={(e) => setFormState({ ...formState, email: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900" placeholder="e.g. alexis@company.com" />
+                                            <input
+                                                id="form-email"
+                                                type="email"
+                                                required
+                                                value={formState.email}
+                                                onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900"
+                                                placeholder="e.g. alexis@company.com"
+                                            />
                                         </div>
                                     </div>
 
@@ -610,7 +643,14 @@ export default function App() {
                                         <label htmlFor="form-company" className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
                                             Company (Optional)
                                         </label>
-                                        <input id="form-company" type="text" value={formState.company} onChange={(e) => setFormState({ ...formState, company: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900" placeholder="e.g. Systems Inc." />
+                                        <input
+                                            id="form-company"
+                                            type="text"
+                                            value={formState.company}
+                                            onChange={(e) => setFormState({ ...formState, company: e.target.value })}
+                                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:focus:bg-slate-900"
+                                            placeholder="e.g. Systems Inc."
+                                        />
                                     </div>
 
                                     <div>
@@ -686,16 +726,15 @@ export default function App() {
                     </div>
 
                     <div className="text-[11px] font-mono text-slate-500 sm:text-right">
-                        <span>© 2026 Fazal Shah. All Rights Reserved. Kathmandu, Nepal.</span>
+                        <span>© {new Date().getFullYear()} Fazal Shah. All Rights Reserved. Kathmandu, Nepal.</span>
                     </div>
                 </div>
             </footer>
 
             {/* Theme toggle (class-based) */}
             <button aria-label="Toggle theme" onClick={toggleTheme} className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 backdrop-blur-sm">
-                            {theme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-900" />}
+                {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-900" />}
             </button>
-
-            </div>
+        </div>
     );
 }
