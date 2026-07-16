@@ -20,6 +20,7 @@ export default function GsapSections(props: any) {
     const [currentStep, setCurrentStep] = useState(0);
     const stepRef = useRef(0);
     const lastTransitionTimeRef = useRef(0);
+    const isTransitioningRef = useRef(false);
 
     useEffect(() => {
         stepRef.current = currentStep;
@@ -48,6 +49,7 @@ export default function GsapSections(props: any) {
 
     const goToStep = (targetStep: number) => {
         setCurrentStep(targetStep);
+        isTransitioningRef.current = true;
 
         if (typeof window === "undefined") return;
 
@@ -60,15 +62,33 @@ export default function GsapSections(props: any) {
         const Y = progress * maxScroll;
 
         if (lenisRef.current) {
+            let completed = false;
             lenisRef.current.scrollTo(Y, {
                 duration: 0.9,
                 easing: (val) => Math.min(1, 1.001 - Math.pow(2, -10 * val)),
+                lock: true,
+                onComplete: () => {
+                    completed = true;
+
+                    setTimeout(() => {
+                        isTransitioningRef.current = false;
+                    }, 200);
+                },
             });
+
+            setTimeout(() => {
+                if (!completed) {
+                    isTransitioningRef.current = false;
+                }
+            }, 1200);
         } else {
             window.scrollTo({
                 top: Y,
                 behavior: "smooth",
             });
+            setTimeout(() => {
+                isTransitioningRef.current = false;
+            }, 1000);
         }
 
         setActiveIndex(i);
@@ -92,6 +112,8 @@ export default function GsapSections(props: any) {
             if (Math.abs(e.deltaY) < 15) return;
 
             e.preventDefault();
+
+            if (isTransitioningRef.current) return;
 
             const now = Date.now();
             if (now - lastTransitionTimeRef.current < 450) {
@@ -120,14 +142,21 @@ export default function GsapSections(props: any) {
 
         let touchStartY = 0;
         const handleTouchStart = (e: TouchEvent) => {
-            touchStartY = e.touches[0].clientY;
+            if (e.touches && e.touches[0]) {
+                touchStartY = e.touches[0].clientY;
+            }
         };
 
         const handleTouchMove = (e: TouchEvent) => {
-            e.preventDefault();
+            if (e.cancelable) {
+                e.preventDefault();
+            }
         };
 
         const handleTouchEnd = (e: TouchEvent) => {
+            if (isTransitioningRef.current) return;
+
+            if (!e.changedTouches || !e.changedTouches[0]) return;
             const touchEndY = e.changedTouches[0].clientY;
             const diffY = touchStartY - touchEndY;
 
@@ -165,8 +194,10 @@ export default function GsapSections(props: any) {
             if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
                 e.preventDefault();
 
+                if (isTransitioningRef.current) return;
+
                 const now = Date.now();
-                if (now - lastTransitionTimeRef.current < 850) return;
+                if (now - lastTransitionTimeRef.current < 450) return;
 
                 if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
                     if (stepRef.current > 0) {
