@@ -1,4 +1,4 @@
-import { SkillCategory, CaseStudy, ExperienceItem } from "../types";
+import { SkillCategory, CaseStudy, ExperienceItem, GsapSectionItem } from "../types";
 
 export const skillCategories: SkillCategory[] = [
     {
@@ -151,5 +151,58 @@ export const careerTimeline: ExperienceItem[] = [
         description: "Development and maintenance of high-volume accounting and resource planning systems matching global corporate structures.",
         impacts: ["Engineered localized transactional modules satisfying tax structures in both Korea and multi-province global setups", "Resolved deep structural query bottlenecks, reducing batch monthly closing times on high-activity client instances by 50%", "Integrated automated testing frameworks enabling rapid regression feedback during rapid iterative release cycles"],
         techUsed: ["C#", "SQL Server", "XML/XSLT", "jQuery", "Reporting Services", "SVN"],
+    },
+];
+
+export const gsapSections: GsapSectionItem[] = [
+    {
+        title: "Frontend Development",
+        description: "I build modern, responsive interfaces focused on performance and exceptional user experience.",
+        accentColor: "#6366f1",
+    },
+    {
+        title: "Backend Engineering",
+        description: "I engineer secure, scalable backend systems with clean and maintainable architectures.",
+        accentColor: "#0ea5e9",
+    },
+    {
+        title: "Performance Optimization",
+        description: "I optimize applications for speed, scalability, reliability, and production readiness.",
+        accentColor: "#34d399",
+    },
+    {
+        title: "Software Architecture",
+        description: "I design enterprise solutions built for flexibility, growth, and long term success.",
+        accentColor: "#d97706",
+    },
+    {
+        title: "DevOps & Infrastructure",
+        description: "I streamline deployments with automation, containers, cloud, and CI/CD pipelines.",
+        accentColor: "#10b981",
+    },
+    {
+        title: "System Integration",
+        description: "I integrate business platforms through APIs, services, and workflow automation.",
+        accentColor: "#8b5cf6",
+    },
+    {
+        title: "Technical Leadership",
+        description: "I lead teams through architecture, mentoring, code quality, and successful delivery.",
+        accentColor: "#3b82f6",
+    },
+    {
+        title: "Legacy Modernization",
+        description: "I modernize outdated applications using modern technologies without business disruption.",
+        accentColor: "#f43f5e",
+    },
+    {
+        title: "AI Solutions",
+        description: "I build practical AI features that enhance products and automate business processes.",
+        accentColor: "#a855f7",
+    },
+    {
+        title: "End to End Delivery",
+        description: "I deliver complete software solutions from concept to production deployment.",
+        accentColor: "#fbbf24",
     },
 ];
