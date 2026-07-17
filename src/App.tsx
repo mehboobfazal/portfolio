@@ -204,8 +204,8 @@ export default function App() {
                     {/* MAIN CONTAINER */}
                     <main className="flex-1 flex flex-col">
                         {/* 2. HERO SECTION */}
-                        <img src="/hero_bg.jpg" alt="Hero Background" className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none" />
                         <section id="hero" className="relative min-h-[95vh] flex items-center pt-16 pb-16 overflow-hidden bg-gradient-to-b from-white to-slate-50/50">
+                            <img src="/hero_bg.jpg" alt="Hero Background" className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none" />
                             {/* Subtle Ambient Accents */}
                             <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-indigo-500/10 blur-[130px] rounded-full pointer-events-none" />
                             <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-cyan-500/10 blur-[110px] rounded-full pointer-events-none" />
@@ -599,30 +599,22 @@ export default function App() {
                                             <span className="w-1.5 h-1.5 bg-cyan-650 rounded-full" /> Let's Connect
                                         </h2>
                                         <h3 className="font-display font-bold text-3xl sm:text-4xl text-slate-800 tracking-tight leading-tight mb-4">Get In Touch</h3>
-                                        <p className="text-sm text-slate-600 leading-relaxed mb-8 max-w-md">Have a web application, modern microservice deployment, or relational database architecture project? I'd love to chat. Feel free to use the contact form, shoot over an email, or message me directly on WhatsApp.</p>
+                                        <p className="text-sm text-slate-600 leading-relaxed mb-8 max-w-md">Have a web application, modern microservice deployment, or relational database architecture project? I'd love to chat. Feel free to use the contact form, shoot over an email.</p>
 
                                         {/* Direct info list */}
                                         <div className="space-y-4 font-mono text-xs">
                                             <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs dark:bg-slate-800 dark:border-slate-700">
-                                                <Mail className="w-4 h-4 text-indigo-600" />
+                                                <Mail className="w-4 h-4 text-emerald-500" />
                                                 <span className="text-slate-400 font-semibold">EMAIL:</span>
-                                                <a href="mailto:mehboobfazal36@gmail.com" className="text-indigo-600 hover:text-indigo-805 hover:underline">
+                                                <a href="mailto:mehboobfazal36@gmail.com" className="text-emerald-500 hover:text-emerald-700 hover:underline">
                                                     mehboobfazal36@gmail.com
-                                                </a>
-                                            </div>
-
-                                            <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs dark:bg-slate-800 dark:border-slate-700">
-                                                <Phone className="w-4 h-4 text-emerald-600" />
-                                                <span className="text-slate-400 font-semibold">WHATSAPP / Call:</span>
-                                                <a href="https://wa.me/9779712012399" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700 hover:underline">
-                                                    +977 9712012399
                                                 </a>
                                             </div>
 
                                             <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs dark:bg-slate-800 dark:border-slate-700">
                                                 <MapPin className="w-4 h-4 text-cyan-600" />
                                                 <span className="text-slate-400 font-semibold">LOCATION:</span>
-                                                <span className="text-slate-700 font-sans font-medium dark:text-slate-200">Kathmandu, Nepal</span>
+                                                <span className="text-cyan-700 font-sans font-medium">Kathmandu, Nepal</span>
                                             </div>
                                         </div>
                                     </div>
@@ -720,7 +712,7 @@ export default function App() {
                                             {/* Informational Note for clean transparency */}
                                             <div className="flex items-start gap-2 bg-slate-50 p-3 border border-slate-200 rounded-xl mt-4">
                                                 <Info className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-                                                <p className="text-[11px] text-slate-500 leading-snug">Note: Submitting this form temporarily models message transfer to simulated local parameters. Your message won't be leaked and will be processed immediately. You can also click the email or WhatsApp link on the left.</p>
+                                                <p className="text-[11px] text-slate-500 leading-snug">Note: Submitting this form temporarily models message transfer to simulated local parameters. Your message won't be leaked and will be processed immediately. You can also click the email on the left.</p>
                                             </div>
                                         </form>
                                     </div>
