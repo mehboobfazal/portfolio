@@ -49,7 +49,6 @@ export default function GsapSections(props: any) {
 
     const goToStep = (targetStep: number) => {
         setCurrentStep(targetStep);
-        isTransitioningRef.current = true;
 
         if (typeof window === "undefined") return;
 
@@ -62,33 +61,16 @@ export default function GsapSections(props: any) {
         const Y = progress * maxScroll;
 
         if (lenisRef.current) {
-            let completed = false;
             lenisRef.current.scrollTo(Y, {
-                duration: 0.9,
+                duration: 0,
                 easing: (val) => Math.min(1, 1.001 - Math.pow(2, -10 * val)),
-                lock: true,
-                onComplete: () => {
-                    completed = true;
-
-                    setTimeout(() => {
-                        isTransitioningRef.current = false;
-                    }, 200);
-                },
+                lock: false,
             });
-
-            setTimeout(() => {
-                if (!completed) {
-                    isTransitioningRef.current = false;
-                }
-            }, 1200);
         } else {
             window.scrollTo({
                 top: Y,
-                behavior: "smooth",
+                behavior: "auto",
             });
-            setTimeout(() => {
-                isTransitioningRef.current = false;
-            }, 1000);
         }
 
         setActiveIndex(i);
@@ -116,7 +98,7 @@ export default function GsapSections(props: any) {
             if (isTransitioningRef.current) return;
 
             const now = Date.now();
-            if (now - lastTransitionTimeRef.current < 450) {
+            if (now - lastTransitionTimeRef.current < 0) {
                 return;
             }
 
@@ -163,7 +145,7 @@ export default function GsapSections(props: any) {
             if (Math.abs(diffY) < 40) return;
 
             const now = Date.now();
-            if (now - lastTransitionTimeRef.current < 850) return;
+            if (now - lastTransitionTimeRef.current < 0) return;
 
             if (diffY > 0) {
                 if (stepRef.current < 19) {
@@ -197,7 +179,7 @@ export default function GsapSections(props: any) {
                 if (isTransitioningRef.current) return;
 
                 const now = Date.now();
-                if (now - lastTransitionTimeRef.current < 450) return;
+                if (now - lastTransitionTimeRef.current < 0) return;
 
                 if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
                     if (stepRef.current > 0) {
