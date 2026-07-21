@@ -264,6 +264,8 @@ export default function GsapSections(props: any) {
 
                 let lastTime = 0;
                 let simTime = 0;
+                const isMobile = window.innerWidth < 768;
+                const patternScale = isMobile ? 0.55 : 1;
 
                 const draw = (timestamp: number) => {
                     if (lastTime === 0) {
@@ -293,7 +295,7 @@ export default function GsapSections(props: any) {
                             offscreenCtx.rotate(props.gridRotate + simTime * 0.02);
                             offscreenCtx.strokeStyle = `rgba(99, 102, 241, ${props.gridAlpha})`;
                             offscreenCtx.lineWidth = 1;
-                            const step = 60 * props.gridScale;
+                            const step = 60 * props.gridScale * patternScale;
                             const size = Math.max(width, height) * 2;
                             for (let x = -size; x < size; x += step) {
                                 offscreenCtx.beginPath();
@@ -321,29 +323,32 @@ export default function GsapSections(props: any) {
                                 offscreenCtx.stroke();
 
                                 const x = (width * 0.05 + simTime * 200 * (1 + i * 0.25)) % width;
-                                const radialGlow = offscreenCtx.createRadialGradient(x, y, 0, x, y, 30);
+                                const glowRadius = 30 * patternScale;
+                                const radialGlow = offscreenCtx.createRadialGradient(x, y, 0, x, y, glowRadius);
                                 radialGlow.addColorStop(0, `rgba(14, 165, 233, ${props.beamAlpha * 2.5})`);
                                 radialGlow.addColorStop(1, "rgba(14, 165, 233, 0)");
                                 offscreenCtx.fillStyle = radialGlow;
                                 offscreenCtx.beginPath();
-                                offscreenCtx.arc(x, y, 30, 0, Math.PI * 2);
+                                offscreenCtx.arc(x, y, glowRadius, 0, Math.PI * 2);
                                 offscreenCtx.fill();
                             }
                         }
 
                         if (props.streamAlpha > 0) {
                             offscreenCtx.fillStyle = `rgba(52, 211, 153, ${props.streamAlpha})`;
-                            for (let i = 0; i < 35; i++) {
+                            const itemCount = Math.max(15, Math.floor(35 * patternScale));
+                            for (let i = 0; i < itemCount; i++) {
                                 const x = (i * 139) % width;
                                 const speed = (6 + (i % 5) * 4) * props.streamSpeed;
                                 const y = ((simTime * speed * 25 + i * 17) % (height + 250)) - 150;
-                                offscreenCtx.fillRect(x, y, 1.2, 50 + (i % 3) * 40);
+                                offscreenCtx.fillRect(x, y, 1.2, (50 + (i % 3) * 40) * patternScale);
                             }
                         }
 
                         if (props.nodeAlpha > 0) {
                             const nodes = [];
-                            for (let i = 0; i < 18; i++) {
+                            const nodeCount = Math.max(8, Math.floor(18 * patternScale));
+                            for (let i = 0; i < nodeCount; i++) {
                                 const x = ((i * 197) % (width - 120)) + 60;
                                 const y = ((i * 397) % (height - 120)) + 60;
                                 nodes.push({ x, y });
@@ -353,7 +358,7 @@ export default function GsapSections(props: any) {
                             for (let i = 0; i < nodes.length; i++) {
                                 for (let j = i + 1; j < nodes.length; j++) {
                                     const distance = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
-                                    if (distance < 280) {
+                                    if (distance < 280 * patternScale) {
                                         offscreenCtx.beginPath();
                                         offscreenCtx.moveTo(nodes[i].x, nodes[i].y);
                                         offscreenCtx.lineTo(nodes[j].x, nodes[j].y);
@@ -364,15 +369,16 @@ export default function GsapSections(props: any) {
                             offscreenCtx.fillStyle = `rgba(217, 119, 6, ${props.nodeAlpha * 1.5})`;
                             nodes.forEach((node) => {
                                 offscreenCtx.beginPath();
-                                offscreenCtx.arc(node.x, node.y, 4, 0, Math.PI * 2);
+                                offscreenCtx.arc(node.x, node.y, 4 * patternScale, 0, Math.PI * 2);
                                 offscreenCtx.fill();
                             });
                         }
 
                         if (props.matrixAlpha > 0) {
                             offscreenCtx.fillStyle = `rgba(16, 185, 129, ${props.matrixAlpha})`;
-                            offscreenCtx.font = "11px monospace";
-                            for (let i = 0; i < 45; i++) {
+                            offscreenCtx.font = `${Math.max(8, 11 * patternScale)}px monospace`;
+                            const matrixCount = Math.max(20, Math.floor(45 * patternScale));
+                            for (let i = 0; i < matrixCount; i++) {
                                 const x = (i * 79) % width;
                                 const speed = 2.5 * props.matrixSpeed;
                                 const y = (simTime * speed * 22 + i * 31) % (height + 80);
@@ -385,30 +391,31 @@ export default function GsapSections(props: any) {
                             offscreenCtx.strokeStyle = `rgba(139, 92, 246, ${props.pulseAlpha * 0.45})`;
                             offscreenCtx.lineWidth = 1.5;
                             for (let i = 0; i < 3; i++) {
-                                const yOffset = i * 160 - 160;
+                                const yOffset = (i * 160 - 160) * patternScale;
                                 offscreenCtx.beginPath();
                                 offscreenCtx.moveTo(0, height / 2 + yOffset);
-                                offscreenCtx.bezierCurveTo(width * 0.28, height / 2 + yOffset - 280, width * 0.72, height / 2 + yOffset + 280, width, height / 2 + yOffset);
+                                offscreenCtx.bezierCurveTo(width * 0.28, height / 2 + yOffset - 280 * patternScale, width * 0.72, height / 2 + yOffset + 280 * patternScale, width, height / 2 + yOffset);
                                 offscreenCtx.stroke();
 
                                 const t = (simTime * 0.16 + i * 0.33) % 1.0;
                                 const cx = (1 - t) * (1 - t) * (1 - t) * 0 + 3 * (1 - t) * (1 - t) * t * (width * 0.28) + 3 * (1 - t) * t * t * (width * 0.72) + t * t * t * width;
-                                const cy = (1 - t) * (1 - t) * (1 - t) * (height / 2 + yOffset) + 3 * (1 - t) * (1 - t) * t * (height / 2 + yOffset - 280) + 3 * (1 - t) * t * t * (height / 2 + yOffset + 280) + t * t * t * (height / 2 + yOffset);
+                                const cy = (1 - t) * (1 - t) * (1 - t) * (height / 2 + yOffset) + 3 * (1 - t) * (1 - t) * t * (height / 2 + yOffset - 280 * patternScale) + 3 * (1 - t) * t * t * (height / 2 + yOffset + 280 * patternScale) + t * t * t * (height / 2 + yOffset);
 
-                                const pulseGrad = offscreenCtx.createRadialGradient(cx, cy, 0, cx, cy, 32);
+                                const pulseRadius = 32 * patternScale;
+                                const pulseGrad = offscreenCtx.createRadialGradient(cx, cy, 0, cx, cy, pulseRadius);
                                 pulseGrad.addColorStop(0, `rgba(139, 92, 246, ${props.pulseAlpha * 2.8})`);
                                 pulseGrad.addColorStop(1, "rgba(139, 92, 246, 0)");
                                 offscreenCtx.fillStyle = pulseGrad;
                                 offscreenCtx.beginPath();
-                                offscreenCtx.arc(cx, cy, 32, 0, Math.PI * 2);
+                                offscreenCtx.arc(cx, cy, pulseRadius, 0, Math.PI * 2);
                                 offscreenCtx.fill();
                             }
                         }
 
                         if (props.glowSize > 0) {
-                            const gx = width / 2 + Math.cos(simTime * 0.4) * 140;
-                            const gy = height / 2 + Math.sin(simTime * 0.4) * 70;
-                            const radius = 340 * props.glowSize;
+                            const gx = width / 2 + Math.cos(simTime * 0.4) * 140 * patternScale;
+                            const gy = height / 2 + Math.sin(simTime * 0.4) * 70 * patternScale;
+                            const radius = 340 * props.glowSize * patternScale;
                             const glowGrad = offscreenCtx.createRadialGradient(gx, gy, 0, gx, gy, radius);
                             glowGrad.addColorStop(0, `rgba(59, 130, 246, ${props.glowSize * 0.25})`);
                             glowGrad.addColorStop(0.5, `rgba(147, 51, 234, ${props.glowSize * 0.08})`);
@@ -449,7 +456,7 @@ export default function GsapSections(props: any) {
                         if (props.haloAlpha > 0) {
                             const hx = width / 2;
                             const hy = height / 2;
-                            const hrad = 240 * props.haloSize;
+                            const hrad = 240 * props.haloSize * patternScale;
 
                             const haloGrad = offscreenCtx.createRadialGradient(hx, hy, hrad * 0.7, hx, hy, hrad * 1.3);
                             haloGrad.addColorStop(0, "rgba(251, 191, 36, 0)");
@@ -461,13 +468,14 @@ export default function GsapSections(props: any) {
                             offscreenCtx.fill();
 
                             offscreenCtx.fillStyle = `rgba(251, 191, 36, ${props.haloAlpha * 1.8})`;
-                            for (let i = 0; i < 30; i++) {
+                            const haloParticles = Math.max(15, Math.floor(30 * patternScale));
+                            for (let i = 0; i < haloParticles; i++) {
                                 const radAngle = simTime * 0.2 + i * 0.4;
                                 const dist = (hrad * 0.8 + Math.sin(simTime + i) * 35) % (hrad * 1.4);
                                 const px = hx + Math.cos(radAngle) * dist;
                                 const py = hy + Math.sin(radAngle) * dist;
                                 offscreenCtx.beginPath();
-                                offscreenCtx.arc(px, py, 1.6, 0, Math.PI * 2);
+                                offscreenCtx.arc(px, py, 1.6 * patternScale, 0, Math.PI * 2);
                                 offscreenCtx.fill();
                             }
                         }
@@ -808,7 +816,7 @@ export default function GsapSections(props: any) {
                     aria-label="Skip portfolio"
                 >
                     <span>Skip</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 text-neutral-400 group-hover:text-white" />
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 text-neutral-400 group-hover:text-white animate-bounce-x" />
                 </button>
             </div>
         </main>

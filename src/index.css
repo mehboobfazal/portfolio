@@ -48,6 +48,23 @@ body {
 .dark .bg-white\/95 {
     background-color: rgba(7, 16, 41, 0.95) !important;
 }
+
+/* Arrow animation for infinite left-right motion */
+@keyframes bounce-x {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+@layer utilities {
+    .animate-bounce-x {
+        animation: bounce-x 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
 .dark .bg-slate-50 {
     background-color: #071427 !important;
 }
@@ -84,39 +101,44 @@ body {
 
 /* Indigo / Accent overrides (chips, badges, subtle bg accents) */
 .dark .bg-indigo-50 {
-  background-color: rgba(79, 70, 229, 0.06) !important; /* subtle dark indigo */
+    background-color: rgba(79, 70, 229, 0.06) !important; /* subtle dark indigo */
 }
 .dark .border-indigo-100 {
-  border-color: rgba(99, 102, 241, 0.16) !important;
+    border-color: rgba(99, 102, 241, 0.16) !important;
 }
 .dark .border-indigo-200 {
-  border-color: rgba(99, 102, 241, 0.12) !important;
+    border-color: rgba(99, 102, 241, 0.12) !important;
 }
 .dark .text-indigo-700 {
-  color: #c7d9ff !important;
+    color: #c7d9ff !important;
 }
 .dark .text-indigo-600 {
-  color: #b3cfff !important;
+    color: #b3cfff !important;
 }
 .dark .bg-indigo-50\/30 {
-  background-color: rgba(79,70,229,0.06) !important;
+    background-color: rgba(79, 70, 229, 0.06) !important;
 }
 .dark .bg-indigo-50\/50 {
-  background-color: rgba(79,70,229,0.08) !important;
+    background-color: rgba(79, 70, 229, 0.08) !important;
 }
 
 /* Hero-specific gradient override to remove bright white in dark mode */
 .dark #hero {
-  background: linear-gradient(180deg, rgba(7,16,41,0.6), rgba(7,16,41,0.2));
+    background: linear-gradient(180deg, rgba(7, 16, 41, 0.6), rgba(7, 16, 41, 0.2));
 }
 
 /* Ensure buttons and chips are readable in both modes if they rely on bg-white or bg-slate-50 */
-.dark .bg-white, .dark .bg-slate-50, .dark .bg-slate-50\/50, .dark .bg-white\/80, .dark .bg-white\/95 {
-  color: inherit;
+.dark .bg-white,
+.dark .bg-slate-50,
+.dark .bg-slate-50\/50,
+.dark .bg-white\/80,
+.dark .bg-white\/95 {
+    color: inherit;
 }
 
 /* Slightly stronger contrast for interactive controls in dark mode */
-.dark .px-4.py-2, .dark .px-5.py-3, .dark .px-6.py-3 {
-  /* noop block to increase selector specificity where needed */
+.dark .px-4.py-2,
+.dark .px-5.py-3,
+.dark .px-6.py-3 {
+    /* noop block to increase selector specificity where needed */
 }
-
